@@ -34,12 +34,7 @@ const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
-    const createdUser = await user.save();
-    // res.status(201).json({
-    //   id: createdUser._id,
-    //   name: createdUser.name,
-    //   email: createdUser.email,
-    // });
+    await user.save();
 
     // Create JWT(JsonWebToken)
     const payload = {
@@ -47,18 +42,9 @@ const registerUser = async (req, res) => {
         id: user.id,
       },
     };
-
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "1d",
-      },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
+    
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" });
+    res.status(201).json({ message: "User registered successfully", token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
