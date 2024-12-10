@@ -13,7 +13,7 @@ const userSchema = Joi.object({
 const registerUser = async (req, res) => {
   const { error } = userSchema.validate(req.body, { abortEarly: false });
   if (error) {
-    return res.status(400).json(error.details);
+    return res.status(400).json(error.message);
   }
 
   const { name, email, password } = req.body;

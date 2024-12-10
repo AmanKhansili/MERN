@@ -1,11 +1,10 @@
 import mongoose, { model, Schema } from "mongoose";
-import { User } from "./user.model.js";
 
 const profileSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
-      ref: User,
+      ref: "user",
     },
     company: {
       type: String,
