@@ -22,6 +22,7 @@ const authController = async (req, res) => {
         id: user.id,
       },
     };
+    //Genrate JWT
     const token = jwt.sign(payload, process.env.JWT_SECRET);
     res.status(200).json({ msg: "User login sucess", token });
   } catch (error) {
