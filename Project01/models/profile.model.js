@@ -9,6 +9,9 @@ const profileSchema = new Schema(
     company: {
       type: String,
     },
+    website: {
+      type: String,
+    },
     location: {
       type: String,
     },
@@ -17,9 +20,6 @@ const profileSchema = new Schema(
       required: true,
     },
     skills: {
-      type: String,
-    },
-    company: {
       type: [String],
       required: true,
     },
@@ -90,19 +90,19 @@ const profileSchema = new Schema(
     ],
     social: {
       youtube: {
-        typr: String,
+        type: String,
       },
       twitter: {
-        typr: String,
+        type: String,
       },
       facebook: {
-        typr: String,
+        type: String,
       },
       linkedin: {
-        typr: String,
+        type: String,
       },
       instagram: {
-        typr: String,
+        type: String,
       },
     },
     date: {

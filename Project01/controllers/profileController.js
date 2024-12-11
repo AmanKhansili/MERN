@@ -4,11 +4,12 @@ import { Profile } from "../models/profile.model.js";
 const profileSchema = Joi.object({
   status: Joi.string().required(),
   skills: Joi.string().required(),
-});
+}).unknown(true);
 const profile = async (req, res) => {
   const { error } = profileSchema.validate(req.body, { abortEarly: false });
-  error && res.status(400).json(error.message);
-
+  if (error) {
+    return res.status(400).json(error.message);
+  }
   // Extract fields from request body
   const {
     company,
@@ -48,7 +49,21 @@ const profile = async (req, res) => {
   linkedin && (profileFields.social.linkedin = linkedin);
 
   try {
-    let profile = Profile.findOne({ user: req.user.id });
+    let profile = await Profile.findOne({ user: req.user.id });
+    //Update
+    if (profile) {
+      profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true }
+      );
+      return res.json(profile);
+    }
+
+    //create
+    profile = new Profile(profileFields);
+    await profile.save();
+    res.json(profile);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
