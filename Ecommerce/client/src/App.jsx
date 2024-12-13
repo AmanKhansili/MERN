@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { lightTheme } from "./utils/Themes";
+import { darkTheme, lightTheme } from "./utils/Themes";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -17,11 +17,11 @@ const Container = styled.div`
   transition: all 0.2s ease;
 `;
 function App() {
-  const [count, setCount] = useState(0);
+  const [theme, setTheme] = useState(lightTheme);
 
   return (
     <>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Container>
             <Navbar />
