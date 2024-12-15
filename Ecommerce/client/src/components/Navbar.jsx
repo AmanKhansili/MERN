@@ -125,7 +125,7 @@ const MobileMenu = styled.ul`
   opacity: ${({ isOpen }) => (isOpen ? "100%" : "0")};
   z-index: ${({ isOpen }) => (isOpen ? "1000" : "-1000")};
 `;
-const Navbar = () => {
+const Navbar = ({ openAuth, setOpenAuth }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Nav>
@@ -170,7 +170,7 @@ const Navbar = () => {
               }}
             >
               <Button text="Sign Up" outlined small />
-              <Button text="Sign In" small />
+              <Button text="Sign In" small onClick={() => setOpenAuth(!openAuth)} />
             </div>
           </MobileMenu>
         )}
@@ -184,7 +184,7 @@ const Navbar = () => {
           <Navlink to="/cart">
             <ShoppingCartOutlined sx={{ color: "inherit", fontSize: "28px" }} />
           </Navlink>
-          <Button text="SignIn" />
+          <Button text="SignIn" onClick={() => setOpenAuth(!openAuth)} />
         </MobileIcons>
 
         <ButtonContainer>
@@ -197,7 +197,7 @@ const Navbar = () => {
           <Navlink to="/cart">
             <ShoppingCartOutlined sx={{ color: "inherit", fontSize: "28px" }} />
           </Navlink>
-          <Button text="SignIn" />
+          <Button text="SignIn" onClick={() => setOpenAuth(!openAuth)} />
         </ButtonContainer>
       </NavbarContainer>
     </Nav>

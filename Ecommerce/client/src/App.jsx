@@ -4,6 +4,7 @@ import { darkTheme, lightTheme } from "./utils/Themes";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Authentication from "./pages/Authentication";
 
 const Container = styled.div`
   width: 100%;
@@ -18,16 +19,18 @@ const Container = styled.div`
 `;
 function App() {
   const [theme, setTheme] = useState(lightTheme);
+  const [openAuth, setOpenAuth] = useState(false);
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Container>
-            <Navbar />
+            <Navbar setOpenAuth={setOpenAuth} openAuth={openAuth}/>
             <Routes>
               <Route path="/" element={<Home />} />
             </Routes>
+            {openAuth && <Authentication openAuth={openAuth} setOpenAuth={setOpenAuth} />}
           </Container>
         </BrowserRouter>
       </ThemeProvider>
