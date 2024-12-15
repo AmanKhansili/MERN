@@ -119,7 +119,8 @@ const MobileMenu = styled.ul`
   top: 80px;
   right: 0;
   transition: all 0.6s ease-in-out;
-  transform: ${({ isOpen }) => (isOpen ? "translateY(0)" : "translateY(-100%)")};
+  transform: ${({ isOpen }) =>
+    isOpen ? "translateY(0)" : "translateY(-100%)"};
   border-radius: 0 0 20px 20px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   opacity: ${({ isOpen }) => (isOpen ? "100%" : "0")};
@@ -162,15 +163,13 @@ const Navbar = ({ openAuth, setOpenAuth }) => {
             <Navlink to="/Contact" onClick={() => setIsOpen(!isOpen)}>
               Contact
             </Navlink>
-            <div
-              style={{
-                flex: "1",
-                display: "flex",
-                gap: "12px",
-              }}
-            >
+            <div className="flex flex-1 gap-3">
               <Button text="Sign Up" outlined small />
-              <Button text="Sign In" small onClick={() => setOpenAuth(!openAuth)} />
+              <Button
+                text="Sign In"
+                small
+                onClick={() => setOpenAuth(!openAuth)}
+              />
             </div>
           </MobileMenu>
         )}
