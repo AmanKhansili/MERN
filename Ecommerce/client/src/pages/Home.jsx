@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Img from "../utils/images/Header.png";
 import { category } from "../utils/data";
 import ProductCategoryCard from "../components/card/ProductCategoryCard";
+import ProductCard from "../components/card/ProductCard";
 
 const Container = styled.div`
   padding: 20px 30px;
@@ -58,6 +59,9 @@ const Home = () => {
       </Section>
       <Section>
         <Title center>Our Bestseller</Title>
+        <CardWrapper>
+          <ProductCard />
+        </CardWrapper>
       </Section>
     </Container>
   );
