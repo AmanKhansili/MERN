@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Authentication from "./pages/Authentication";
+import ShopingListing from "./pages/ShopingListing";
 
 const Container = styled.div`
   width: 100%;
@@ -29,6 +30,7 @@ function App() {
             <Navbar setOpenAuth={setOpenAuth} openAuth={openAuth}/>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/Shop" element={<ShopingListing />} />
             </Routes>
             {openAuth && <Authentication openAuth={openAuth} setOpenAuth={setOpenAuth} />}
           </Container>

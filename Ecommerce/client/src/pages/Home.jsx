@@ -61,6 +61,10 @@ const Home = () => {
         <Title center>Our Bestseller</Title>
         <CardWrapper>
           <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
         </CardWrapper>
       </Section>
     </Container>
