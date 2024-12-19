@@ -177,7 +177,7 @@ const Navbar = ({ openAuth, setOpenAuth }) => {
           <Navlink to="/search">
             <SearchRounded sx={{ color: "inherit", fontSize: "28px" }} />
           </Navlink>
-          <Navlink to="/favorite">
+          <Navlink to="/favourite">
             <FavoriteBorder sx={{ color: "inherit", fontSize: "28px" }} />
           </Navlink>
           <Navlink to="/cart">
@@ -190,7 +190,7 @@ const Navbar = ({ openAuth, setOpenAuth }) => {
           <Navlink to="/search">
             <SearchRounded sx={{ color: "inherit", fontSize: "28px" }} />
           </Navlink>
-          <Navlink to="/favorite">
+          <Navlink to="/favourite">
             <FavoriteBorder sx={{ color: "inherit", fontSize: "28px" }} />
           </Navlink>
           <Navlink to="/cart">

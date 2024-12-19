@@ -38,6 +38,9 @@ const CardWrapper = styled.div`
   flex-wrap: wrap;
   gap: 24px;
   justify-content: center;
+  @media (max-width: 750px) {
+    gap: 14px;
+  }
 `;
 const Home = () => {
   return (

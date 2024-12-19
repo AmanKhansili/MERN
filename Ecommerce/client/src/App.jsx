@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Authentication from "./pages/Authentication";
 import ShopingListing from "./pages/ShopingListing";
+import Favourite from "./pages/Favourite";
+import Cart from "./pages/Cart";
 
 const Container = styled.div`
   width: 100%;
@@ -27,12 +29,16 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Container>
-            <Navbar setOpenAuth={setOpenAuth} openAuth={openAuth}/>
+            <Navbar setOpenAuth={setOpenAuth} openAuth={openAuth} />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Shop" element={<ShopingListing />} />
+              <Route path="/favourite" element={<Favourite />} />
+              <Route path="/cart" element={<Cart />} />
             </Routes>
-            {openAuth && <Authentication openAuth={openAuth} setOpenAuth={setOpenAuth} />}
+            {openAuth && (
+              <Authentication openAuth={openAuth} setOpenAuth={setOpenAuth} />
+            )}
           </Container>
         </BrowserRouter>
       </ThemeProvider>
