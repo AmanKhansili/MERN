@@ -8,6 +8,7 @@ import Authentication from "./pages/Authentication";
 import ShopingListing from "./pages/ShopingListing";
 import Favourite from "./pages/Favourite";
 import Cart from "./pages/Cart";
+import ProductDetails from "./pages/ProductDetails";
 
 const Container = styled.div`
   width: 100%;
@@ -35,6 +36,7 @@ function App() {
               <Route path="/Shop" element={<ShopingListing />} />
               <Route path="/favourite" element={<Favourite />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/shop/:id" element={<ProductDetails />} />
             </Routes>
             {openAuth && (
               <Authentication openAuth={openAuth} setOpenAuth={setOpenAuth} />

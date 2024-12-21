@@ -2,7 +2,13 @@ import { CircularProgress } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 
-const Button = styled.div`
+// Styled Button Component with Prop Filtering
+const Button = styled.div.withConfig({
+  shouldForwardProp: (prop) =>
+    !["full", "outlined", "flex", "small", "isDisabled", "isLoading"].includes(
+      prop,
+    ),
+})`
   border-radius: 10px;
   color: white;
   font-size: 14px;
@@ -16,6 +22,7 @@ const Button = styled.div`
   padding: 16px 26px;
   box-shadow: 1px 20px 35px 0px ${({ theme }) => theme.primary + 40};
   border: 1px solid ${({ theme }) => theme.primary};
+
   @media (max-width: 600px) {
     padding: 8px 12px;
   }
@@ -24,7 +31,7 @@ const Button = styled.div`
     type === "secondary"
       ? `
   background: ${theme.secondary};
-border: 1px solid ${({ theme }) => theme.secondary};
+  border: 1px solid ${theme.secondary};
   `
       : `
   background: ${theme.primary};
@@ -35,38 +42,43 @@ border: 1px solid ${({ theme }) => theme.secondary};
     `
   opacity: 0.8;
   cursor: not-allowed;
-
   `}
+
   ${({ isLoading }) =>
     isLoading &&
     `
     opacity: 0.8;
-  cursor: not-allowed;
-`}
-${({ flex }) =>
+    cursor: not-allowed;
+  `}
+
+  ${({ flex }) =>
     flex &&
     `
     flex: 1;
-`}
+  `}
 
-${({ small }) =>
+  ${({ small }) =>
     small &&
     `
 padding: 10px 28px;
-`}
+  `}
+
   ${({ outlined, theme }) =>
     outlined &&
     `
-background: transparent;
-color: ${theme.primary};
+  background: transparent;
+  color: ${theme.primary};
   box-shadow: none;
-`}
+  `}
+
   ${({ full }) =>
     full &&
     `
-  width: 100%;`}
+  width: 100%;
+  `}
 `;
 
+// Functional Button Component
 const button = ({
   text,
   isLoading,
