@@ -5,7 +5,7 @@ import { User } from "../models/User.model.js";
 import { Order } from "../models/Order.model.js";
 
 const UserRegister = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, img, password } = req.body;
   try {
     //check if user already existed
     const userExist = await User.findOne({ email });
@@ -19,6 +19,7 @@ const UserRegister = async (req, res) => {
     const user = new User({
       name,
       email,
+      img,
       password: hashPassword,
     });
 
@@ -32,5 +33,24 @@ const UserRegister = async (req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
-const UserLogin = () => {};
+const UserLogin = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    //check if user already existed
+    const userExist = await User.findOne({ email });
+    if (!userExist) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    const isPasswordCorrect = bcrypt.compareSync(password, userExist.password);
+    if (!isPasswordCorrect) {
+      res.status(403).json({ msg: "Incorrect password" });
+    }
+
+    const token = jwt.sign({ userId: userExist._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    res.status(200).json({ token, user: userExist.name });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
 export { UserRegister, UserLogin };
