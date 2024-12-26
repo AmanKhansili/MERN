@@ -3,7 +3,8 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import ConnectDB from "./db/db.js";
-import router from "./routes/user.route.js";
+import Userrouter from "./routes/user.route.js";
+import Productrouter from "./routes/products.route.js";
 
 const app = express();
 ConnectDB();
@@ -22,7 +23,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.use("/api/user", router);
+app.use("/api/user", Userrouter);
+app.use("/api/products", Productrouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running at port ${process.env.PORT}`);
