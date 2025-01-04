@@ -151,6 +151,7 @@ export const addToFavorites = async (req, res, next) => {
   try {
     const { productId } = req.body;
     const userJWT = req.user;
+    
     const user = await User.findById(userJWT.id);
 
     if (!user.favourites.includes(productId)) {
@@ -177,7 +178,7 @@ export const removeFromFavorites = async (req, res, next) => {
     res.status(500).json(error);
   }
 };
-export const getUserFavorites = async (req, res, next) => {
+export const getUserFavourites = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const user = await User.findById(userId).populate("favourites").exec();
@@ -186,7 +187,7 @@ export const getUserFavorites = async (req, res, next) => {
       res.status(404).json({ msg: "User not found" });
     }
 
-    res.status(200).json(user.favourites);
+    return res.status(200).json(user.favourites);
   } catch (error) {
     res.status(500).json(error);
   }

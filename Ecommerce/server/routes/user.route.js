@@ -4,13 +4,14 @@ import {
   addToFavorites,
   getAllcatItems,
   getAllOrders,
-  getUserFavorites,
+  getUserFavourites,
   placeOrder,
   removeFromCart,
   removeFromFavorites,
   UserLogin,
   UserRegister,
 } from "../controller/User.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
@@ -18,17 +19,17 @@ router.post("/signup", UserRegister);
 router.post("/signin", UserLogin);
 
 //cart
-router.get("/cart", getAllcatItems);
-router.post("/cart", addToCart);
-router.patch("/cart", removeFromCart);
+router.get("/cart", verifyToken, getAllcatItems);
+router.post("/cart", verifyToken, addToCart);
+router.patch("/cart", verifyToken, removeFromCart);
 
 //order
-router.get("/order", getAllOrders);
-router.post("/order", placeOrder);
+router.get("/order", verifyToken, getAllOrders);
+router.post("/order", verifyToken, placeOrder);
 
 //favourites
-router.get("/favorite", getUserFavorites);
-router.post("/favorite", addToFavorites);
-router.patch("/favorite", removeFromFavorites);
+router.get("/favorite", verifyToken, getUserFavourites);
+router.post("/favorite", verifyToken, addToFavorites);
+router.patch("/favorite", verifyToken, removeFromFavorites);
 
 export default router;
