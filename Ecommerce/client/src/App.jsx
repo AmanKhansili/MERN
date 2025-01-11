@@ -9,6 +9,7 @@ import ShopingListing from "./pages/ShopingListing";
 import Favourite from "./pages/Favourite";
 import Cart from "./pages/Cart";
 import ProductDetails from "./pages/ProductDetails";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   width: 100%;
@@ -22,6 +23,8 @@ const Container = styled.div`
   transition: all 0.2s ease;
 `;
 function App() {
+  const { currentUser } = useSelector((state) => state.user);
+  const { open, message, severity } = useSelector((state) => state.user);
   const [theme, setTheme] = useState(lightTheme);
   const [openAuth, setOpenAuth] = useState(false);
 
@@ -30,7 +33,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Container>
-            <Navbar setOpenAuth={setOpenAuth} openAuth={openAuth} />
+            <Navbar
+              setOpenAuth={setOpenAuth}
+              openAuth={openAuth}
+              currentUser={currentUser}
+            />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Shop" element={<ShopingListing />} />

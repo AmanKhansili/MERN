@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   snackbar: snackbarReducer,
 });
 
-const persistedReducer = persistedReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
