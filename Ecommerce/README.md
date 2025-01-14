@@ -44,7 +44,7 @@ Follow these steps to set up the project locally:
    ```  
 
 5. **Access the Application**  
-   Open your browser and navigate to `http://localhost:3000`.  
+   Open your browser and navigate to `http://localhost:4000`.  
 
 ## 📘 Learning Outcomes  
 - Build a full-stack eCommerce application using the **MERN stack**.  
