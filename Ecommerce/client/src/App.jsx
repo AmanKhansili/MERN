@@ -10,6 +10,7 @@ import Favourite from "./pages/Favourite";
 import Cart from "./pages/Cart";
 import ProductDetails from "./pages/ProductDetails";
 import { useSelector } from "react-redux";
+import ToastMessage from "./components/ToastMessage";
 
 const Container = styled.div`
   width: 100%;
@@ -48,6 +49,7 @@ function App() {
             {openAuth && (
               <Authentication openAuth={openAuth} setOpenAuth={setOpenAuth} />
             )}
+            {openAuth && <ToastMessage open={open} severity={severity} />}
           </Container>
         </BrowserRouter>
       </ThemeProvider>

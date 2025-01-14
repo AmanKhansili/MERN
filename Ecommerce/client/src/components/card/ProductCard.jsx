@@ -118,11 +118,11 @@ const Percent = styled.div`
   font-weight: 500;
   color: green;
 `;
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
   return (
     <Card>
       <Top>
-        <Image src="https://jaxsonmaximus.com/cdn/shop/files/ARI9100.ARW_compressed.jpg?v=1725391508" />
+        <Image src={product?.img} />
         <Menu>
           <MenuItem>
             <FavoriteRounded sx={{ fontSize: "20px", color: "red" }} />
@@ -138,10 +138,10 @@ const ProductCard = () => {
         </Rate>
       </Top>
       <Details>
-        <Title>Title </Title>
-        <Desc>Description</Desc>
+        <Title>{product?.title} </Title>
+        <Desc>{product?.name}</Desc>
         <Price>
-          $1200 <Span>1500</Span> <Percent>20%off</Percent>
+          ${product?.price?.org} <Span>${product?.price?.mrp}</Span> <Percent>${product?.price?.off}% off</Percent>
         </Price>
       </Details>
     </Card>
