@@ -10,7 +10,7 @@ Welcome to this exciting project where we build a sleek and dynamic **eCommerce 
 - **Responsive Design**: Fully optimized for both desktop and mobile devices.  
 
 ## 🔧 Tech Stack  
-- **Frontend**: React.js, Tailwind CSS for styling.  
+- **Frontend**: React.js, ailwind CSS, and styled-components for a modern, efficient styling approach.  
 - **Backend**: Node.js, Express.js for APIs.  
 - **Database**: MongoDB for data storage.  
 - **State Management**: Context API/Redux for managing application state.  
