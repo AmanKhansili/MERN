@@ -17,3 +17,8 @@
 - Creating many container components that integrate with Redux
 
 - Testing with the Redux Chrome extension
+---
+
+# Project 1 - Dynamic eCommerce Website with React.js
+
+<img width="1154" alt="image" src="https://raw.githubusercontent.com/AmanKhansili/MERN/refs/heads/main/Ecommerce/client/src/assets/ECommerce.png">
