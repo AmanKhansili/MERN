@@ -1,6 +1,6 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-const userSchema = new Schema(
+const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -22,27 +22,24 @@ const userSchema = new Schema(
     cart: {
       type: [
         {
-          product: {
-            type: Schema.Types.ObjectId,
-            ref: "Product",
-          },
+          product: { type: mongoose.Schema.Types.ObjectId, ref: "Products" },
           quantity: { type: Number, default: 1 },
         },
       ],
       default: [],
     },
     favourites: {
-      type: [Schema.Types.ObjectId],
-      ref: "Product",
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Products",
       default: [],
     },
     orders: {
-      type: [Schema.Types.ObjectId],
-      ref: "Order",
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Orders",
       default: [],
     },
   },
   { timestamps: true }
 );
 
-export const User = model("User", userSchema);
+export const User = mongoose.model("User", UserSchema);

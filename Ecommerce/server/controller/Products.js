@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Product } from "../models/Product.model.js";
+import { Products } from "../models/Product.model.js";
 
 const addProducts = async (req, res) => {
   try {
@@ -14,7 +14,7 @@ const addProducts = async (req, res) => {
     for (const productInfo of productsData) {
       const { title, name, desc, img, price, sizes, category } = productInfo;
 
-      const product = new Product({
+      const product = new Products({
         title,
         name,
         desc,
@@ -68,9 +68,9 @@ const getproducts = async (req, res, next) => {
       ];
     }
 
-    const products = await Product.find(filter);
+    const products = await Products.find(filter);
     return res.status(200).json(products);
-  } catch (err) {
+  } catch (error) {
     res.status(500).json({ msg: error.message });
   }
 };
@@ -79,10 +79,10 @@ const getProductById = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (!mongoose.isValidObjectId(id)) {
-      return next(res.status(400).json({ msg: "Invalid product ID" }));
+      return res.status(400).json({ msg: "Invalid product ID" });
     }
 
-    const product = await Product.findById(id);
+    const product = await Products.findById(id);
     if (!product) {
       res.status(404).json({ msg: "Product not found" });
     }

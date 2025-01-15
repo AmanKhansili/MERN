@@ -2,10 +2,40 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import TextInput from "./TextInput";
 import Button from "./Button";
-import { UserSignIn } from "../api/index";
+import { UserSignIn } from "../api";
 import { useDispatch } from "react-redux";
-import { openSnackbar } from "../redux/reducers/snackbarSlice";
 import { loginSuccess } from "../redux/reducers/userSlice";
+import { openSnackbar } from "../redux/reducers/snackbarSlice";
+
+const Container = styled.div`
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+`;
+const Title = styled.div`
+  font-size: 30px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.primary};
+`;
+const Span = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.text_secondary + 90};
+`;
+const TextButton = styled.div`
+  width: 100%;
+  text-align: end;
+  color: ${({ theme }) => theme.text_primary};
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  &:hover {
+    color: ${({ theme }) => theme.primary};
+  }
+`;
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -16,13 +46,13 @@ const SignIn = () => {
 
   const validateInputs = () => {
     if (!email || !password) {
-      alert("Please fill all fields");
+      alert("Please fill in all fields");
       return false;
     }
     return true;
   };
 
-  const handleSignIn = async () => {
+  const handelSignIn = async () => {
     setButtonLoading(true);
     setButtonDisabled(true);
     if (validateInputs()) {
@@ -48,8 +78,8 @@ const SignIn = () => {
               }),
             );
           } else {
-            setButtonDisabled(false);
             setButtonLoading(false);
+            setButtonDisabled(false);
             dispatch(
               openSnackbar({
                 message: err.message,
@@ -62,15 +92,14 @@ const SignIn = () => {
     setButtonDisabled(false);
     setButtonLoading(false);
   };
+
   return (
-    <div className="container flex w-full max-w-[500px] flex-col gap-9">
+    <Container>
       <div>
-        <p className="Title text-[30px] font-extrabold">Welcome to Krist 👋</p>
-        <span className="text-[16px] font-normal">
-          Please login with your details here
-        </span>
+        <Title>Welcome to Krist 👋</Title>
+        <Span>Please login with your details here</Span>
       </div>
-      <div className="flex flex-col gap-5">
+      <div style={{ display: "flex", gap: "20px", flexDirection: "column" }}>
         <TextInput
           label="Email Address"
           placeholder="Enter your email address"
@@ -84,17 +113,16 @@ const SignIn = () => {
           value={password}
           handelChange={(e) => setPassword(e.target.value)}
         />
-        <p className="cursor-pointer text-end text-sm font-bold">
-          Forget Password?
-        </p>
+
+        <TextButton>Forgot Password?</TextButton>
         <Button
           text="Sign In"
-          onClick={handleSignIn}
+          onClick={handelSignIn}
           isLoading={buttonLoading}
           isDisabled={buttonDisabled}
         />
       </div>
-    </div>
+    </Container>
   );
 };
 

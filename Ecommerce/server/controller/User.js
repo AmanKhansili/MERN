@@ -1,10 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { createError } from "../error.js";
 import { User } from "../models/User.model.js";
 import { Order } from "../models/Order.model.js";
 
-const UserRegister = async (req, res) => {
+export const UserRegister = async (req, res) => {
   const { name, email, img, password } = req.body;
   try {
     //check if user already existed
@@ -33,7 +32,7 @@ const UserRegister = async (req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
-const UserLogin = async (req, res) => {
+export const UserLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     //check if user not existed
@@ -54,38 +53,38 @@ const UserLogin = async (req, res) => {
   }
 };
 
-const addToCart = async (req, res) => {
+export const addToCart = async (req, res) => {
   try {
     const { productId, quantity } = req.body;
     const userJWT = req.user;
     const user = await User.findById(userJWT.id);
-    const existingCartItemIndex = user.cart.finsdIndex((item) => item.product.equals(productId));
-    if (existingCartItemIndex != -1) {
+    const existingCartItemIndex = user.cart.findIndex((item) => item?.product?.equals(productId));
+    if (existingCartItemIndex !== -1) {
+      // Product is already in the cart, update the quantity
       user.cart[existingCartItemIndex].quantity += quantity;
     } else {
+      // Product is not in the cart, add it
       user.cart.push({ product: productId, quantity });
     }
     await user.save();
 
     res.status(200).json({ msg: "Product added to cart successfully", user });
   } catch (error) {
-    res.send(500).json(error);
+    res.status(500).json(error);
   }
 };
 
-const removeFromCart = async (req, res) => {
+export const removeFromCart = async (req, res) => {
   try {
-    const { productId, quantity } = erq.body;
+    const { productId, quantity } = req.body;
     const userJWT = req.user;
     const user = await User.findById(userJWT.id);
     if (!user) {
       res.status(404).json({ msg: "User not found" });
     }
-
     const productIndex = user.cart.findIndex((item) => item.product.equals(productId));
-
     if (productIndex !== -1) {
-      if (quality && quantity > 0) {
+      if (quantity && quantity > 0) {
         user.cart[productIndex].quantity -= quantity;
         if (user.cart[productIndex].quantity <= 0) {
           user.cart.splice(productIndex, 1);
@@ -93,6 +92,7 @@ const removeFromCart = async (req, res) => {
       } else {
         user.cart.splice(productIndex, 1);
       }
+
       await user.save();
       res.status(200).json({ msg: "Product quantity updated in cart", user });
     } else {
@@ -103,7 +103,7 @@ const removeFromCart = async (req, res) => {
   }
 };
 
-const getAllcatItems = async (req, res, next) => {
+export const getAllcartItems = async (req, res, next) => {
   try {
     const userJWT = req.user;
     const user = await User.findById(userJWT.id).populate({
@@ -130,6 +130,7 @@ export const placeOrder = async (req, res, next) => {
     await order.save();
 
     user.cart.save();
+
     user.cart = [];
     await user.save();
 
@@ -151,7 +152,6 @@ export const addToFavorites = async (req, res, next) => {
   try {
     const { productId } = req.body;
     const userJWT = req.user;
-    
     const user = await User.findById(userJWT.id);
 
     if (!user.favourites.includes(productId)) {
@@ -192,5 +192,3 @@ export const getUserFavourites = async (req, res, next) => {
     res.status(500).json(error);
   }
 };
-
-export { UserRegister, UserLogin, addToCart, removeFromCart, getAllcatItems };

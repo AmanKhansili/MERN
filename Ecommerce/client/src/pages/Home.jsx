@@ -5,6 +5,7 @@ import { category } from "../utils/data";
 import ProductCategoryCard from "../components/card/ProductCategoryCard";
 import ProductCard from "../components/card/ProductCard";
 import { getAllProducts } from "../api";
+import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
   padding: 20px 30px;
@@ -43,6 +44,7 @@ const CardWrapper = styled.div`
     gap: 14px;
   }
 `;
+
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
@@ -59,12 +61,17 @@ const Home = () => {
   }, []);
   return (
     <Container>
-      <Section>
-        <img
-          src={Img}
-          alt="Header"
-          className="h-[700px] w-[100%] max-w-[1200px] object-cover"
-        />
+      <Section className="relative">
+        <div>
+          <img
+            src={Img}
+            alt="Header"
+            className="h-[700px] w-[100%] max-w-[1200px] object-cover "
+          />
+          <NavLink to="/Shop" className="absolute top-[68%] right-[45%] text-transparent">
+          SHOP NOW
+          </NavLink>
+        </div>
       </Section>
       <Section>
         <Title>Shop by categories</Title>

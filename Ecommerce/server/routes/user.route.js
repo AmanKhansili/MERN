@@ -2,7 +2,7 @@ import express from "express";
 import {
   addToCart,
   addToFavorites,
-  getAllcatItems,
+  getAllcartItems,
   getAllOrders,
   getUserFavourites,
   placeOrder,
@@ -19,7 +19,7 @@ router.post("/signup", UserRegister);
 router.post("/signin", UserLogin);
 
 //cart
-router.get("/cart", verifyToken, getAllcatItems);
+router.get("/cart", verifyToken, getAllcartItems);
 router.post("/cart", verifyToken, addToCart);
 router.patch("/cart", verifyToken, removeFromCart);
 
