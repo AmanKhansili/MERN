@@ -23,6 +23,9 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the E-commerce API!");
+});
 app.use("/api/user", Userrouter);
 app.use("/api/products", Productrouter);
 
