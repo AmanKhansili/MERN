@@ -29,6 +29,6 @@ app.get("/", (req, res) => {
 app.use("/api/user", Userrouter);
 app.use("/api/products", Productrouter);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log(`Server is running at port ${process.env.PORT}`);
 });
